@@ -33,7 +33,7 @@ def CHECK_PYINST():
     OP = raw_input("Do you want to Install PyInstaller? (No):");
     if(OP.lower() == "y" or OP.lower() == "yes"):
       CHECK_PIP();
-      ps.call(["pip", "install", "pyinstaller", "-g"]);
+      ps.call(["pip", "install", "pyinstaller"]);
     else:
       print("Aborting Installation!");
       sys.exit();
