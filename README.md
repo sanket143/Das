@@ -1,7 +1,16 @@
 # Das
 Command Line Captive Portal for DA-IICTians
 
-## How to use
+## Installation
+
+```
+$ git clone https://github.com/sanket143/Das.git
+$ cd Das
+$ sudo make install
+Successfully Installed
+```
+
+## Usage
 
 ```
 $ das login
