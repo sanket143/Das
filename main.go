@@ -28,6 +28,7 @@ func main(){
   reader := bufio.NewReader(os.Stdin);
 
   // Getting Creadentials
+getCredentials:
   fmt.Print("Username: ");
   inputUsername, _ := reader.ReadString('\n');
 
@@ -66,9 +67,12 @@ func main(){
     fmt.Println("Succeefully Logged In.");
   } else if ReMaxLimit.FindSubmatch(XMLBytes) != nil {
     fmt.Println("Maximum Login Limit Reach.");
+    goto getCredentials;
   } else if ReInvalidCred.FindSubmatch(XMLBytes) != nil {
     fmt.Println("Invalid Credentials.");
+    goto getCredentials;
   } else {
     fmt.Println("Data Exceed.");
+    goto getCredentials;
   }
 }
