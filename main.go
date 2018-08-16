@@ -18,7 +18,8 @@ import (
 func help(){
   fmt.Println("Das v1.0.1_beta");
   fmt.Println("usage: das [option]\n");
-  fmt.Println("login : to Log into DANetwork");
+  fmt.Println("login  : Logs into DANetwork");
+  fmt.Println("logout : Logs you out of DANetwork");
 }
 
 func main(){
@@ -30,7 +31,7 @@ func main(){
     help();
     os.Exit(0);
   } else if args[0] == "login" {
-    // Regexp Setup
+    // Regex Setup
     ReLogin := regexp.MustCompile("You have successfully logged in");
     ReMaxLimit := regexp.MustCompile("You have reached Maximum Login Limit");
     ReInvalidCred := regexp.MustCompile("Make sure your password is correct");
@@ -85,6 +86,35 @@ func main(){
     } else {
       fmt.Println("Data Exceed.");
       goto getCredentials;
+    }
+  } else if args[0] == "logout" {
+
+    // Regex Setup
+    ReLogout := regexp.MustCompile("You have successfully logged off");
+
+    resp, err := http.PostForm("https://10.100.56.55:8090/logout.xml",
+      url.Values{
+        "a": {"1524343263066"},
+        "mode": {"191"},
+        "username": {"whatever"},
+        "producttype": {"0"}});
+    if err != nil {
+      log.Fatal(err)
+    }
+
+    defer resp.Body.Close();
+
+    XMLBytes, err := ioutil.ReadAll(resp.Body);
+
+    if err != nil {
+      log.Fatal(err)
+    }
+
+    // Checking Status
+    if ReLogout.FindSubmatch(XMLBytes) != nil {
+      fmt.Println("Successfully Logged Out.");
+    } else {
+      fmt.Println("Error Occured.");
     }
   } else {
     help();
