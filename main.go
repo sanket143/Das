@@ -92,12 +92,7 @@ func main(){
     // Regex Setup
     ReLogout := regexp.MustCompile("You have successfully logged off");
 
-    resp, err := http.PostForm("https://10.100.56.55:8090/logout.xml",
-      url.Values{
-        "a": {"1524343263066"},
-        "mode": {"191"},
-        "username": {"whatever"},
-        "producttype": {"0"}});
+    resp, err := http.NewRequest("GET", "https://10.100.56.55:8090/logout.xml", nil);
     if err != nil {
       log.Fatal(err)
     }
