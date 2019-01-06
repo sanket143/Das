@@ -11,3 +11,7 @@ build: main.go
 install: ./bin/das
 	@sudo cp ./bin/das $(IDIR)
 	@echo "Installed Successfully."
+	
+remove: ./bin/das
+	@sudo rm $(IDIR)/das
+	@echo "Uninstalled Successfully."
